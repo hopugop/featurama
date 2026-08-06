@@ -124,11 +124,11 @@ class ScyllaClient:
             logger.error(f"Batch execution failed: {e}")
             raise
 
-    def initialize_schema(self):
+    def initialize_schema(self, replication_factor):
         """Create keyspace and tables."""
         logger.info("Initializing Featurama schema...")
 
-        statements = get_schema_statements()
+        statements = get_schema_statements(replication_factor)
         for statement in statements:
             logger.info(f"Executing: {statement[:100]}...")
             self.execute(statement)
