@@ -33,7 +33,10 @@ class FeatureStore:
         self,
         contact_points: List[str] = None,
         port: int = 9042,
-        keyspace: str = KEYSPACE_NAME
+        keyspace: str = KEYSPACE_NAME,
+        username: str = None,
+        password: str = None,
+        datacenter: str = None
     ):
         """
         Initialize Feature Store.
@@ -43,7 +46,9 @@ class FeatureStore:
             port: CQL port
             keyspace: Keyspace name
         """
-        self.client = ScyllaClient(contact_points, port, keyspace)
+        self.client = ScyllaClient(
+            contact_points, port, keyspace, username, password, datacenter
+        )
         self.keyspace = keyspace
         self._connected = False
 
